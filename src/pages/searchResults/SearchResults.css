@@ -1,0 +1,50 @@
+.movie__list {
+    padding: 2rem; /* Add padding to the container */
+    background-color: #f8f9fa; /* Light background for the search results */
+}
+
+.list__title {
+    font-size: 2rem; /* Large title font size */
+    margin-bottom: 1.5rem; /* Space below the title */
+    color: #333; /* Dark text color */
+}
+
+.list__cards {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    justify-content: center; /* Center items in the container */
+}
+
+.result__item {
+    margin: 0.5rem; /* Space between items */
+    text-align: center; /* Center the text under the images */
+    width: calc(16.66% - 1rem); /* 6 items in a row, with space */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.result__item img {
+    width: 100%; /* Full width for images */
+    border-radius: 8px; /* Rounded corners for images */
+}
+
+.result__item:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+.back-button {
+    background-color:#ffd700; /* Button color */
+    color:yellow; /* Text color */
+    border: none; /* No border */
+    padding: 5px 10px; /* Padding */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    margin-bottom: 20px; /* Space below button */
+}
+
+.back-button:hover {
+    background-color: #ff0000; /* Darker shade on hover */
+}
+.back-button img {
+    width: 20px; /* Set width to desired size */
+    height: 20px; /* Set height to desired size */
+    /* Or use only one of the above and let the other auto-adjust */
+}
