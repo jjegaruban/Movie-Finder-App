@@ -1,53 +1,392 @@
-.posterImage{
-    height: 600px;
+/* Home Component Styles */
+.home {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.posterImage > img {
-    margin: auto;
-    display: block;
+/* Loading Spinner */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Poster Image */
+.posterImage {
+    position: relative;
+    height: 80vh;
+    min-height: 500px;
+    max-height: 800px;
     width: 100%;
 }
 
+.posterImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.posterImage:hover img {
+    transform: scale(1.05);
+}
+
+/* Overlay */
 .posterImage__overlay {
     position: absolute;
-    padding: 5rem;
-    bottom: 0px;
-    height: 70%;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        transparent 100%
+    );
     display: flex;
     flex-direction: column;
-    width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-start;
-    background-image: linear-gradient(rgb(0,0,0,0), rgb(0,0,0,1));
-    opacity: 1;
-    transition: opacity .3s;
-}   
+    padding: 4rem 6rem;
+    color: white;
+    pointer-events: none;
+}
 
-.posterImage__overlay:hover {
-    opacity: 1;
+.posterImage__overlay > * {
+    pointer-events: auto;
 }
 
 .posterImage__title {
-    font-weight: 900;
-    font-size: 4rem;
-    margin-bottom: 0.4rem;
-    text-align: left;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    max-width: 70%;
+    line-height: 1.2;
+    animation: slideUp 0.6s ease;
 }
 
-.posterImage__runtime {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+.posterImage__info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    animation: slideUp 0.6s ease 0.1s both;
+}
+
+.posterImage__release {
+    color: #e0e0e0;
 }
 
 .posterImage__rating {
-    margin-left: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+}
+
+.posterImage__rating i {
+    color: #ffd700;
+    font-size: 1rem;
 }
 
 .posterImage__description {
-    font-style: italic;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    line-height: 1.6;
+    max-width: 50%;
+    margin-bottom: 2rem;
+    color: #e0e0e0;
+    animation: slideUp 0.6s ease 0.2s both;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.posterImage__button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
     font-size: 1rem;
-    margin-bottom: 0.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
     display: flex;
-    text-align: left;
-    width: 50%;
+    align-items: center;
+    gap: 0.8rem;
+    animation: slideUp 0.6s ease 0.3s both;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.posterImage__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+.posterImage__button i {
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Carousel Customization */
+.carousel .slide {
+    background: transparent;
+}
+
+.carousel .control-dots {
+    margin: 0;
+    bottom: 20px;
+}
+
+.carousel .control-dots .dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: none;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.carousel .control-dots .dot.selected {
+    background: #667eea;
+    width: 30px;
+    border-radius: 5px;
+}
+
+.carousel .control-arrow {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 20px;
+    transition: all 0.3s ease;
+}
+
+.carousel .control-arrow:hover {
+    background: rgba(102, 126, 234, 0.8) !important;
+}
+
+.carousel .control-prev {
+    left: 10px;
+}
+
+.carousel .control-next {
+    right: 10px;
+}
+
+/* Movie List Container */
+.movie-list-container {
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .posterImage {
+        height: 70vh;
+    }
+
+    .posterImage__overlay {
+        padding: 3rem 4rem;
+    }
+
+    .posterImage__title {
+        max-width: 80%;
+    }
+
+    .posterImage__description {
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .posterImage {
+        height: 60vh;
+        min-height: 450px;
+    }
+
+    .posterImage__overlay {
+        padding: 2rem;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.6) 70%,
+            transparent 100%
+        );
+    }
+
+    .posterImage__title {
+        max-width: 100%;
+        font-size: 2rem;
+    }
+
+    .posterImage__description {
+        max-width: 100%;
+        -webkit-line-clamp: 3;
+        font-size: 0.9rem;
+    }
+
+    .posterImage__info {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .posterImage__button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .carousel .control-arrow {
+        display: none;
+    }
+
+    .movie-list-container {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .posterImage {
+        height: 50vh;
+        min-height: 400px;
+    }
+
+    .posterImage__overlay {
+        padding: 1.5rem;
+    }
+
+    .posterImage__title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .posterImage__info {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .posterImage__description {
+        -webkit-line-clamp: 2;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .posterImage__button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .carousel .control-dots .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .carousel .control-dots .dot.selected {
+        width: 20px;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .posterImage:hover img {
+        transform: none;
+    }
+
+    .posterImage__overlay {
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.7) 60%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 600px) and (orientation: landscape) {
+    .posterImage {
+        height: 100vh;
+        min-height: 300px;
+    }
+
+    .posterImage__overlay {
+        padding: 1rem 2rem;
+    }
+
+    .posterImage__title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .posterImage__description {
+        -webkit-line-clamp: 2;
+        margin-bottom: 0.5rem;
+    }
+
+    .posterImage__button {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }

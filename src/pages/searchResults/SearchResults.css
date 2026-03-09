@@ -1,50 +1,443 @@
-.movie__list {
-    padding: 2rem; /* Add padding to the container */
-    background-color: #f8f9fa; /* Light background for the search results */
+/* Search Results Page Styles */
+.search-results {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
 }
 
-.list__title {
-    font-size: 2rem; /* Large title font size */
-    margin-bottom: 1.5rem; /* Space below the title */
-    color: #333; /* Dark text color */
-}
-
-.list__cards {
+/* Header Section */
+.search-header {
+    max-width: 1400px;
+    margin: 0 auto 3rem;
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap onto the next line */
-    justify-content: center; /* Center items in the container */
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
-.result__item {
-    margin: 0.5rem; /* Space between items */
-    text-align: center; /* Center the text under the images */
-    width: calc(16.66% - 1rem); /* 6 items in a row, with space */
-    transition: transform 0.2s; /* Smooth transition for hover effect */
-}
-
-.result__item img {
-    width: 100%; /* Full width for images */
-    border-radius: 8px; /* Rounded corners for images */
-}
-
-.result__item:hover {
-    transform: scale(1.05); /* Scale up on hover */
-}
 .back-button {
-    background-color:#ffd700; /* Button color */
-    color:yellow; /* Text color */
-    border: none; /* No border */
-    padding: 5px 10px; /* Padding */
-    border-radius: 10px; /* Rounded corners */
-    cursor: pointer; /* Pointer on hover */
-    margin-bottom: 20px; /* Space below button */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .back-button:hover {
-    background-color: #ff0000; /* Darker shade on hover */
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
 }
+
 .back-button img {
-    width: 20px; /* Set width to desired size */
-    height: 20px; /* Set height to desired size */
-    /* Or use only one of the above and let the other auto-adjust */
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover img {
+    transform: translateX(-3px);
+}
+
+.back-button span {
+    display: inline-block;
+}
+
+.search-info {
+    flex: 1;
+}
+
+.search-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: white;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.search-query {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-weight: normal;
+    margin-left: 1rem;
+}
+
+.search-stats {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.search-stats strong {
+    color: #ffd700;
+    font-weight: 600;
+}
+
+/* Search Content */
+.search-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Movies Grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Loading State */
+.search-loading {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.search-loading .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+}
+
+.search-loading p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error State */
+.search-error {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.search-error i {
+    font-size: 4rem;
+    color: #ff6b6b;
+    margin-bottom: 1.5rem;
+}
+
+.search-error h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 1rem;
+}
+
+.search-error p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.retry-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.retry-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* No Results State */
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.no-results-icon {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+}
+
+.no-results-icon i {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.no-results h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.no-results p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.no-results-suggestion {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+}
+
+.home-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.home-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.pagination-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.pagination-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.pagination-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-button i {
+    font-size: 0.9rem;
+}
+
+.page-info {
+    color: white;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-results {
+        padding: 1rem;
+    }
+
+    .search-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .back-button {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .search-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .search-query {
+        margin-left: 0;
+    }
+
+    .movies-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+
+    .pagination {
+        gap: 1rem;
+    }
+
+    .pagination-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .pagination-button span {
+        display: none;
+    }
+
+    .pagination-button i {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    .back-button span {
+        display: none;
+    }
+
+    .back-button img {
+        margin: 0;
+    }
+
+    .search-stats {
+        font-size: 0.95rem;
+    }
+
+    .no-results {
+        padding: 2rem 1rem;
+    }
+
+    .no-results h2 {
+        font-size: 1.5rem;
+    }
+
+    .no-results p {
+        font-size: 1rem;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .page-info {
+        order: -1;
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movies-grid > * {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Stagger animation for cards */
+.movies-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.movies-grid > *:nth-child(2) { animation-delay: 0.15s; }
+.movies-grid > *:nth-child(3) { animation-delay: 0.2s; }
+.movies-grid > *:nth-child(4) { animation-delay: 0.25s; }
+.movies-grid > *:nth-child(5) { animation-delay: 0.3s; }
+.movies-grid > *:nth-child(6) { animation-delay: 0.35s; }
+.movies-grid > *:nth-child(7) { animation-delay: 0.4s; }
+.movies-grid > *:nth-child(8) { animation-delay: 0.45s; }
+.movies-grid > *:nth-child(n+9) { animation-delay: 0.5s; }
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .back-button:hover,
+    .pagination-button:hover,
+    .home-button:hover,
+    .retry-button:hover {
+        transform: none;
+    }
+
+    .movies-grid > *:hover {
+        transform: none;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .search-results {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
 }
